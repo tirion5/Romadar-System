@@ -5,29 +5,32 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <style>
-    html, body, #map {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-    .leaflet-popup-content {
-      font-size: 15px;
-    }
-    .custom-marker {
-      background: #222e;
-      border-radius: 50%;
-      width: 16px;
-      height: 16px;
-      border: 2px solid #fff;
-      box-shadow: 0 0 4px #0008;
-      display: block;
-    }
-    .custom-marker:hover {
-      border-color: #ff0;
-      box-shadow: 0 0 10px #ff0a;
-    }
-  </style>
+ <style>
+  html, body, #map {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #111; /* Dark background */
+    color: #eee; /* Light text for body (if needed) */
+  }
+  .leaflet-popup-content {
+    font-size: 15px;
+    color: #eee; /* Light popup text */
+  }
+  .custom-marker {
+    background: #222e;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #fff;
+    box-shadow: 0 0 4px #0008;
+    display: block;
+  }
+  .custom-marker:hover {
+    border-color: #ff0;
+    box-shadow: 0 0 10px #ff0a;
+  }
+</style>
 </head>
 <body>
 <div id="map"></div>
