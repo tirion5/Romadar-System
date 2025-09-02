@@ -5,45 +5,79 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
- <style>
-  html, body, #map {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: #111; /* Dark background */
-    color: #eee; /* Light text for body (if needed) */
-  }
-  .leaflet-popup-content {
-    font-size: 15px;
-    color: #eee; /* Light popup text */
-  }
-  .custom-marker {
-    background: #222e;
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    border: 2px solid #fff;
-    box-shadow: 0 0 4px #0008;
-    display: block;
-  }
-  .custom-marker:hover {
-    border-color: #ff0;
-    box-shadow: 0 0 10px #ff0a;
-  }
-</style>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    html, body, #map {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #111;
+      color: #eee;
+      font-family: 'Orbitron', 'Share Tech Mono', 'Courier New', monospace;
+    }
+
+    .leaflet-popup-content-wrapper {
+      background: #1a1a1a;
+      border: 2px solid #555;
+      box-shadow: 0 0 12px #ff000040;
+      border-radius: 6px;
+    }
+
+    .leaflet-popup-content {
+      color: #f0f0f0;
+      font-size: 14px;
+      line-height: 1.4;
+      padding: 6px 10px;
+    }
+
+    .leaflet-popup-tip {
+      background: #555;
+    }
+
+    a {
+      color: #ffcc00;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #ff0000;
+      text-shadow: 0 0 4px #ff0000aa;
+    }
+
+    .custom-marker {
+      background: #222e;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #fff;
+      box-shadow: 0 0 4px #0008;
+      display: block;
+    }
+
+    .custom-marker:hover {
+      border-color: #ff0;
+      box-shadow: 0 0 10px #ff0a;
+    }
+
+    .leaflet-tooltip {
+      background-color: #222;
+      color: #eee;
+      border: 1px solid #555;
+      font-size: 13px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: 'Orbitron', monospace;
+    }
+  </style>
 </head>
 <body>
 <div id="map"></div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  // Set your map image size here (pixels):
-  const mapWidth = 1920; // update to your PNG's width
-  const mapHeight = 1080; // update to your PNG's height
-
-  // Map bounds for Leaflet
+  const mapWidth = 1920;
+  const mapHeight = 1080;
   const bounds = [[0,0], [mapHeight, mapWidth]];
 
-  // Initialize map
   const map = L.map('map', {
     crs: L.CRS.Simple,
     minZoom: -2,
@@ -51,59 +85,21 @@
     zoomSnap: 0.25,
   });
 
-  // Set map view to fit image
   map.fitBounds(bounds);
 
-  // Add background image
   L.imageOverlay('images/Romadar background Asset.png', bounds).addTo(map);
 
-  // --- PLANET MARKERS ---
-
-  // Update these as you get real coordinates!
   const planetMarkers = [
-    {
-      name: "Romadar",
-      coords: [95, 1391], // placeholder
-      url: "https://spokanicussector.miraheze.org/wiki/Romadar"
-    },
-    {
-      name: "Gilden's Scar",
-      coords: [976, 1786], // placeholder
-      url: "https://spokanicussector.miraheze.org/wiki/Gilden%27s_Scar"
-    },
-    {
-      name: "Rondo",
-      coords: [195, 656], // placeholder
-      url: "https://spokanicussector.miraheze.org/wiki/Rondo"
-    },
-    {
-      name: "Adrona",
-      coords: [545, 1788], // placeholder
-      url: "https://spokanicussector.miraheze.org/wiki/Adrona"
-    },
-    {
-      name: "Vorthax",
-      coords: [660, 1626], // placeholder
-      url: "https://spokanicussector.miraheze.org/wiki/Vorthax"
-    },
-    {
-      name: "Holvanus",
-      coords: [606, 839], // placeholder
-      url: "https://spokanicussector.miraheze.org/wiki/Holvanus"
-    },
-    {
-      name: "Lu'val",
-      coords: [169, 123], // placeholder
-      url: "https://spokanicussector.miraheze.org/wiki/Lu%E2%80%99val"
-    },
-    {
-      name: "Dernys",
-      coords: [821, 1387], // placeholder
-      url: "https://spokanicussector.miraheze.org/wiki/Dernys"
-    }
+    { name: "Romadar", coords: [95, 1391], url: "https://spokanicussector.miraheze.org/wiki/Romadar" },
+    { name: "Gilden's Scar", coords: [976, 1786], url: "https://spokanicussector.miraheze.org/wiki/Gilden%27s_Scar" },
+    { name: "Rondo", coords: [506, 658], url: "https://spokanicussector.miraheze.org/wiki/Rondo" },
+    { name: "Adrona", coords: [545, 1788], url: "https://spokanicussector.miraheze.org/wiki/Adrona" },
+    { name: "Vorthax", coords: [660, 1626], url: "https://spokanicussector.miraheze.org/wiki/Vorthax" },
+    { name: "Holvanus", coords: [606, 839], url: "https://spokanicussector.miraheze.org/wiki/Holvanus" },
+    { name: "Lu'val", coords: [169, 123], url: "https://spokanicussector.miraheze.org/wiki/Lu%E2%80%99val" },
+    { name: "Dernys", coords: [821, 1387], url: "https://spokanicussector.miraheze.org/wiki/Dernys" }
   ];
 
-  // Add markers to the map
   planetMarkers.forEach(planet => {
     const marker = L.marker(planet.coords, {
       icon: L.divIcon({
@@ -112,21 +108,22 @@
       })
     }).addTo(map);
 
-    marker.bindPopup(
-      `<b>${planet.name}</b><br><a href="${planet.url}" target="_blank">Wiki Page</a>`
-    );
-});
-  // --- COORDINATE LOGGER TOOL ---
-  // Click anywhere to log pixel coordinates for marker placement!
-// map.on('click', function(e) {
-//  const y = Math.round(e.latlng.lat);
-//  const x = Math.round(e.latlng.lng);
-//  console.log(`Clicked coordinates: [${y}, ${x}]`);
-//  alert(`Pixel coordinates: [${y}, ${x}]\n\nCopy these and update your planetMarkers array!`);
-// });
+    // Tooltip on hover
+    marker.bindTooltip(planet.name, { direction: 'top', offset: [0, -10] });
 
+    // Redirect on click
+    marker.on('click', () => {
+      window.open(planet.url, '_blank');
+    });
+  });
 
-  // --- END ---
+  // Coordinate logger tool
+  map.on('click', function(e) {
+    const y = Math.round(e.latlng.lat);
+    const x = Math.round(e.latlng.lng);
+    console.log(`Clicked coordinates: [${y}, ${x}]`);
+    alert(`Pixel coordinates: [${y}, ${x}]\n\nCopy these and update your planetMarkers array!`);
+  });
 </script>
 </body>
 </html>
