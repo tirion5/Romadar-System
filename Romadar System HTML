@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Romadar Map</title>
+  <style>
+    .container {
+      position: relative;
+      display: inline-block;
+      max-width: 100%;
+    }
+    .main-image {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .icon {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      /* Example icon style, adjust as needed */
+    }
+    .icon1 { top: 20%; left: 40%; }
+    .icon2 { top: 60%; left: 70%; }
+    /* Add more .iconN classes for more icons */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="images/Romadar background Asset.png" class="main-image" alt="Romadar Background" />
+    <!-- Example icons. Update href and positions as needed. -->
+    <a href="https://example.com/location1" class="icon icon1" title="Location 1">
+      <svg viewBox="0 0 24 24" fill="red" width="32" height="32"><circle cx="12" cy="12" r="10"/></svg>
+    </a>
+    <a href="https://example.com/location2" class="icon icon2" title="Location 2">
+      <svg viewBox="0 0 24 24" fill="blue" width="32" height="32"><circle cx="12" cy="12" r="10"/></svg>
+    </a>
+  </div>
+</body>
+</html>
