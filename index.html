@@ -1,70 +1,135 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Spokanicus Sector - Interactive Romadar Map</title>
+  <title>Romadar Sector Interactive Map</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
-    html, body {
+    html, body, #map {
       height: 100%;
       margin: 0;
+      padding: 0;
     }
-    #map {
-      width: 100vw;
-      height: 100vh;
-      background: #222;
+    .leaflet-popup-content {
+      font-size: 15px;
     }
-    .leaflet-container {
-      background: #222;
+    .custom-marker {
+      background: #222e;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #fff;
+      box-shadow: 0 0 4px #0008;
+      display: block;
+    }
+    .custom-marker:hover {
+      border-color: #ff0;
+      box-shadow: 0 0 10px #ff0a;
     }
   </style>
 </head>
 <body>
-  <div id="map"></div>
+<div id="map"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  // Set your map image size here (pixels):
+  const mapWidth = 1920; // update to your PNG's width
+  const mapHeight = 1080; // update to your PNG's height
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script>
-    // Replace with your image's actual pixel dimensions
-    const imageWidth = 1920; // example width
-    const imageHeight = 1080; // example height
+  // Map bounds for Leaflet
+  const bounds = [[0,0], [mapHeight, mapWidth]];
 
-    // Create the map instance
-    const map = L.map('map', {
-      crs: L.CRS.Simple,
-      minZoom: -2,
-      maxZoom: 2,
-      zoomControl: true
-    });
+  // Initialize map
+  const map = L.map('map', {
+    crs: L.CRS.Simple,
+    minZoom: -2,
+    maxZoom: 2,
+    zoomSnap: 0.25,
+  });
 
-    // Calculate image bounds
-    const bounds = [[0,0], [imageHeight, imageWidth]];
+  // Set map view to fit image
+  map.fitBounds(bounds);
 
-    // Add the image overlay (your map)
-   const image = L.imageOverlay('images/Romadar background Asset.png', bounds).addTo(map);
+  // Add background image
+  L.imageOverlay('image/Romadar background Asset.png', bounds).addTo(map);
 
-    // Fit the map to the image bounds
-    map.fitBounds(bounds);
+  // --- PLANET MARKERS ---
 
-    // Example planet markers - update with your own!
-    // Each marker: [planetName, [y,x] (in image pixels), url]
-    const planetMarkers = [
-      ["Planet A", [300, 400], "https://example.com/planet-a"],
-      ["Planet B", [900, 1200], "https://example.com/planet-b"],
-      ["Planet C", [700, 1700], "https://example.com/planet-c"]
-    ];
+  // Update these as you get real coordinates!
+  const planetMarkers = [
+    {
+      name: "Romadar",
+      coords: [300, 500], // placeholder
+      url: "https://spokanicussector.miraheze.org/wiki/Romadar"
+    },
+    {
+      name: "Escheran Primus",
+      coords: [400, 800], // placeholder
+      url: "https://spokanicussector.miraheze.org/wiki/Escheran_Primus"
+    },
+    {
+      name: "Gilden's Scar",
+      coords: [600, 1200], // placeholder
+      url: "https://spokanicussector.miraheze.org/wiki/Gilden%27s_Scar"
+    },
+    {
+      name: "Rondo",
+      coords: [700, 300], // placeholder
+      url: "https://spokanicussector.miraheze.org/wiki/Rondo"
+    },
+    {
+      name: "Adrona",
+      coords: [200, 950], // placeholder
+      url: "https://spokanicussector.miraheze.org/wiki/Adrona"
+    },
+    {
+      name: "Vorthax",
+      coords: [900, 1700], // placeholder
+      url: "https://spokanicussector.miraheze.org/wiki/Vorthax"
+    },
+    {
+      name: "Holvanus",
+      coords: [550, 150], // placeholder
+      url: "https://spokanicussector.miraheze.org/wiki/Holvanus"
+    },
+    {
+      name: "Lu'val",
+      coords: [1000, 1400], // placeholder
+      url: "https://spokanicussector.miraheze.org/wiki/Lu%E2%80%99val"
+    },
+    {
+      name: "Dernys",
+      coords: [880, 600], // placeholder
+      url: "https://spokanicussector.miraheze.org/wiki/Dernys"
+    }
+  ];
 
-    // Add markers
-    planetMarkers.forEach(([name, [y, x], url]) => {
-      L.marker([y, x])
-        .addTo(map)
-        .bindPopup(`<a href="${url}" target="_blank">${name}</a>`);
-    });
+  // Add markers to the map
+  planetMarkers.forEach(planet => {
+    const marker = L.marker(planet.coords, {
+      icon: L.divIcon({
+        className: 'custom-marker',
+        iconSize: [16, 16]
+      })
+    }).addTo(map);
 
-  </script>
+    marker.bindPopup(
+      `<b>${planet.name}</b><br><a href="${planet.url}" target="_blank">Wiki Page</a>`
+    );
+  });
+
+  // --- COORDINATE LOGGER TOOL ---
+  // Click anywhere to log pixel coordinates for marker placement!
+  map.on('click', function(e) {
+    // e.latlng is [y, x]
+    const y = Math.round(e.latlng.lat);
+    const x = Math.round(e.latlng.lng);
+    console.log(`Clicked coordinates: [${y}, ${x}]`);
+    alert(`Pixel coordinates: [${y}, ${x}]\n\nCopy these and update your planetMarkers array!`);
+  });
+
+  // --- END ---
+</script>
 </body>
 </html>
