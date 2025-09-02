@@ -1,1 +1,70 @@
-path/to/your/file.html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spokanicus Sector - Interactive Romadar Map</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    #map {
+      width: 100vw;
+      height: 100vh;
+      background: #222;
+    }
+    .leaflet-container {
+      background: #222;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Replace with your image's actual pixel dimensions
+    const imageWidth = 1920; // example width
+    const imageHeight = 1080; // example height
+
+    // Create the map instance
+    const map = L.map('map', {
+      crs: L.CRS.Simple,
+      minZoom: -2,
+      maxZoom: 2,
+      zoomControl: true
+    });
+
+    // Calculate image bounds
+    const bounds = [[0,0], [imageHeight, imageWidth]];
+
+    // Add the image overlay (your map)
+    const image = L.imageOverlay('Romadar background Asset.png', bounds).addTo(map);
+
+    // Fit the map to the image bounds
+    map.fitBounds(bounds);
+
+    // Example planet markers - update with your own!
+    // Each marker: [planetName, [y,x] (in image pixels), url]
+    const planetMarkers = [
+      ["Planet A", [300, 400], "https://example.com/planet-a"],
+      ["Planet B", [900, 1200], "https://example.com/planet-b"],
+      ["Planet C", [700, 1700], "https://example.com/planet-c"]
+    ];
+
+    // Add markers
+    planetMarkers.forEach(([name, [y, x], url]) => {
+      L.marker([y, x])
+        .addTo(map)
+        .bindPopup(`<a href="${url}" target="_blank">${name}</a>`);
+    });
+
+  </script>
+</body>
+</html>
