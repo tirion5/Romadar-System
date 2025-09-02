@@ -118,11 +118,13 @@
 });
   // --- COORDINATE LOGGER TOOL ---
   // Click anywhere to log pixel coordinates for marker placement!
-   map.on('click', function(e) {
-    const y = Math.round(e.latlng.lat);
-    const x = Math.round(e.latlng.lng);
-    console.log(`Clicked coordinates: [${y}, ${x}]`);
-    alert(`Pixel coordinates: [${y}, ${x}]\n\nCopy these and update your planetMarkers array!`);
+map.on('click', function(e) {
+  const y = Math.round(e.latlng.lat);
+  const x = Math.round(e.latlng.lng);
+  console.log(`Clicked coordinates: [${y}, ${x}]`);
+  alert(`Pixel coordinates: [${y}, ${x}]\n\nCopy these and update your planetMarkers array!`);
+});
+
 
   // --- END ---
 </script>
