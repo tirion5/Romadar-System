@@ -63,47 +63,42 @@
   const planetMarkers = [
     {
       name: "Romadar",
-      coords: [300, 500], // placeholder
+      coords: [95, 1391], // placeholder
       url: "https://spokanicussector.miraheze.org/wiki/Romadar"
     },
     {
-      name: "Escheran Primus",
-      coords: [400, 800], // placeholder
-      url: "https://spokanicussector.miraheze.org/wiki/Escheran_Primus"
-    },
-    {
       name: "Gilden's Scar",
-      coords: [600, 1200], // placeholder
+      coords: [976, 1786], // placeholder
       url: "https://spokanicussector.miraheze.org/wiki/Gilden%27s_Scar"
     },
     {
       name: "Rondo",
-      coords: [700, 300], // placeholder
+      coords: [506, 658], // placeholder
       url: "https://spokanicussector.miraheze.org/wiki/Rondo"
     },
     {
       name: "Adrona",
-      coords: [200, 950], // placeholder
+      coords: [545, 1788], // placeholder
       url: "https://spokanicussector.miraheze.org/wiki/Adrona"
     },
     {
       name: "Vorthax",
-      coords: [900, 1700], // placeholder
+      coords: [660, 1626], // placeholder
       url: "https://spokanicussector.miraheze.org/wiki/Vorthax"
     },
     {
       name: "Holvanus",
-      coords: [550, 150], // placeholder
+      coords: [606, 839], // placeholder
       url: "https://spokanicussector.miraheze.org/wiki/Holvanus"
     },
     {
       name: "Lu'val",
-      coords: [1000, 1400], // placeholder
+      coords: [169, 123], // placeholder
       url: "https://spokanicussector.miraheze.org/wiki/Lu%E2%80%99val"
     },
     {
       name: "Dernys",
-      coords: [880, 600], // placeholder
+      coords: [821, 1387], // placeholder
       url: "https://spokanicussector.miraheze.org/wiki/Dernys"
     }
   ];
@@ -124,12 +119,12 @@
 
   // --- COORDINATE LOGGER TOOL ---
   // Click anywhere to log pixel coordinates for marker placement!
-  map.on('click', function(e) {
+  // map.on('click', function(e) {
     // e.latlng is [y, x]
-    const y = Math.round(e.latlng.lat);
-    const x = Math.round(e.latlng.lng);
-    console.log(`Clicked coordinates: [${y}, ${x}]`);
-    alert(`Pixel coordinates: [${y}, ${x}]\n\nCopy these and update your planetMarkers array!`);
+  //  const y = Math.round(e.latlng.lat);
+  //  const x = Math.round(e.latlng.lng);
+ //   console.log(`Clicked coordinates: [${y}, ${x}]`);
+ //   alert(`Pixel coordinates: [${y}, ${x}]\n\nCopy these and update your planetMarkers array!`);
   });
 
   // --- END ---
